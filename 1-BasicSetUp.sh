@@ -134,7 +134,7 @@ else
     execute /opt/anaconda3/bin/conda install ipython -y
 
     execute /opt/anaconda3/bin/conda install libgcc -y
-    execute /opt/anaconda3/bin/pip install numpy scipy matplotlib scikit-learn scikit-image jupyter notebook pandas h5py cython jupyterlab
+    execute /opt/anaconda3/bin/pip install numpy scipy matplotlib scikit-learn scikit-image jupyter notebook pandas h5py cython jupyterlab pylint flake8
     execute /opt/anaconda3/bin/pip install msgpack
     execute /opt/anaconda3/bin/conda install line_profiler -y
     sed -i.bak "/anaconda3/d" ~/.zshrc
@@ -162,10 +162,16 @@ execute sudo apt-get install pciutils
 ## Detect if an Nvidia card is attached, and install the graphics drivers automatically
 if [[ -n $(lspci | grep -i nvidia) ]]; then
     spatialPrint "Installing Display drivers and any other auto-detected drivers for your hardware"
+    execute sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nouveau.conf"
+    execute sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nouveau.conf"
     execute sudo add-apt-repository ppa:graphics-drivers/ppa -y
     execute sudo apt-get update
     execute sudo ubuntu-drivers autoinstall
 fi
+
+## Install PulseAudio
+execute sudo apt-get install pulseaudio
+execute sudo apt install pavucontrol
 
 spatialPrint "The script has finished."
 if [[ ! -n $CIINSTALL ]]; then

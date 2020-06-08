@@ -14,10 +14,11 @@ execute () {
 
 execute sudo apt-get install libboost-all-dev curl -y
 
-if [[ $(cat /etc/os-release | grep "VERSION_ID" | grep -o -E '[1-9][1-9]') -le 17 ]]; then
-    execute sudo add-apt-repository ppa:noobslab/themes -y
-    execute sudo apt-get update
-fi
+# if [[ $(cat /etc/os-release | grep "VERSION_ID" | grep -o -E '[1-9][1-9]') -le 17 ]]; then
+#    execute sudo add-apt-repository ppa:noobslab/themes -y
+#    execute sudo apt-get update
+#fi
+
 if [[ $XDG_CURRENT_DESKTOP = *"Unity"* ]]; then	# To be removed once Unity is phased out
     execute sudo apt-get install unity-tweak-tool -y
 elif [[ $XDG_CURRENT_DESKTOP = *"GNOME"* ]]; then
@@ -26,6 +27,7 @@ elif [[ $XDG_CURRENT_DESKTOP = *"GNOME"* ]]; then
 elif [[ $XDG_CURRENT_DESKTOP = *"MATE"* ]]; then
     execute sudo apt-get install mate-tweak -y
 fi
+
 execute sudo apt-get install arc-theme -y
 
 # Install code editor of your choice
@@ -67,9 +69,23 @@ execute sudo apt-get update
 
 if which nautilus > /dev/null; then
     execute sudo apt-get install nautilus-dropbox -y
+    execute sudo apt-get install nautilus-admin -y
+   
 elif which caja > /dev/null; then
     execute sudo apt-get install caja-dropbox -y
 fi
+
+# Network Tools
+execute sudo apt install net-tools -y
+
+# TimeShift BackUp
+execute sudo apt-add-repository -y ppa:teejee2008/ppa
+execuet sudo apt-get update
+execute sudo apt-get install timeshift -y
+
+# Admin Tools
+execute sudo apt-get install alacarte -y
+execute sudo apt-get install synaptic -y
 
 # TLP manager
 execute sudo add-apt-repository ppa:linrunner/tlp -y
@@ -82,7 +98,7 @@ execute sudo apt-get install lm-sensors hddtemp -y
 execute sudo apt-get install psensor xsensors -y
 execute sudo apt-get update
 
-execute sudo apt-get install redshift redshift-gtk shutter -y
+execute sudo apt-get install redshift redshift-gtk -y
 
 mkdir -p ~/.config/autostart
 cp ./config_files/tilda.desktop ~/.config/autostart
@@ -128,7 +144,6 @@ fi
 
 
 # Grub customization
-execute sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y
 execute sudo apt-get update
 execute sudo apt-get install grub-customizer -y
 
@@ -141,6 +156,9 @@ execute sudo apt-get install kazam -y
 execute sudo apt-add-repository ppa:jtaylor/keepass -y
 execute sudo apt-get update -y
 execute sudo apt-get install xdotool keepass2 -y
+
+# Conky
+execute sudo apt install conky-all -y
 
 execute sudo apt-get install vlc -y
 execute mkdir -p ~/.cache/vlc   # For VLSub to work flawlessly
@@ -166,10 +184,10 @@ execute sudo apt-get install firefox -y
 #    execute sudo apt-get install tor torbrowser-launcher -y
 #fi
 
-# # # Install I2P
-# # execute sudo apt-add-repository ppa:i2p-maintainers/i2p -y
-# # execute sudo apt-get update -y
-# # execute sudo apt-get install i2p -y
+# Install I2P
+# execute sudo apt-add-repository ppa:i2p-maintainers/i2p -y
+# execute sudo apt-get update -y
+# execute sudo apt-get install i2p -y
 
 if [[ ! -n $CIINSTALL ]]; then
     # Adobe flashplugin doesn't install on travis for some reason
