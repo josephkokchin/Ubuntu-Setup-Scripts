@@ -206,3 +206,30 @@ if [[ ! -n $CIINSTALL ]]; then
 fi
 
 echo "Script finished"
+
+# Install Steam and Lutris
+execute sudo add-apt-repository multiverse
+execute sudo apt-get update -y
+execute sudo apt install steam
+
+execute sudo dpkg --add-architecture i386
+wget -nc https://dl.winehq.org/wine-builds/winehq.key
+execute sudo apt-key add winehq.key
+execute sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
+execute sudo apt update
+execute sudo apt install --install-recommends winehq-stable
+
+execute sudo add-apt-repository ppa:lutris-team/lutris
+execute sudo apt update
+execute sudo apt install lutris
+
+# Install Chinese Lang Pack
+execute sudo apt install -y fcitx-bin
+execute sudo apt install -y fcitx-googlepinyin
+
+
+# Install Neofetch
+execute sudo add-apt-repository ppa:dawidd0811/neofetch
+execute sudo apt update 
+eexcute sudo apt install neofetch
+
