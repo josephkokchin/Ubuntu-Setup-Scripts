@@ -177,3 +177,8 @@ spatialPrint "The script has finished."
 if [[ ! -n $CIINSTALL ]]; then
     su - $USER
 fi
+
+# Install Caps Lock Indicator
+execute sudo add-apt-repository ppa:tsbarnes/indicator-keylock -y
+execute sudo apt-get update
+execute sudo apt install indicator-keylock
