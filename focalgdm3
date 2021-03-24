@@ -40,9 +40,7 @@ fi
 echo "
 -------------------------------------------------------------------------------------------------------
 Please note that after setting login screen background,
-Reboot is highly recomonded to see the changes If you are running this script for the first time.
-
->>>>>>>>>Next time onwards logout will show you the changed background, No need for Reboot.<<<<<<<<<<<<
+>>>>>>>>> Reboot is highly recomonded to see the changes <<<<<<<<<<<<
 
 Do you want to proceed now? [Yes/no] Type n to exit, or press enter to proceed.
 -------------------------------------------------------------------------------------------------------"
@@ -56,9 +54,10 @@ fi
 
 echo "
 Please Choose any one number from below.
------------------------------------------
-1. for Image		2. for Color
------------------------------------------"
+-------------
+1. for Image
+2. for Color
+-------------"
 read a
 
 if [ -z $a ]
@@ -158,7 +157,7 @@ echo '@import url("resource:///org/gnome/shell/theme/original.css");
   #lockDialogGroup {
   background: '$color' url(file://'$b');
   background-repeat: no-repeat;
-  background-size: cover;;
+  background-size: cover;
   background-position: center; }' > $dest/gdm3.css
 
 echo '<?xml version="1.0" encoding="UTF-8"?>
@@ -230,6 +229,6 @@ fi
 ############################################################################################
 *) #########################################################################################
 ############################################################################################
-echo "Use the parameter '--set' or '--reset'; example: 'focalgdm3.sh --set' or 'focalgdm3.sh --reset'"
+echo "Use the parameter '--set' or '--reset'; example: './focalgdm3 --set' or './focalgdm3 --reset'"
 exit 1
 esac
